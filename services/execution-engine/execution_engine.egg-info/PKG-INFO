@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: execution-engine
+Version: 0.1.0
+Requires-Dist: core-contracts
+Requires-Dist: httpx
+Requires-Dist: pydantic-settings
+Requires-Dist: pydantic
+Requires-Dist: pyyaml

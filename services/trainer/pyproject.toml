@@ -1,0 +1,21 @@
+[project]
+name = "trainer"
+version = "0.1.0"
+dependencies = [
+    "core-contracts",
+    "pandas",
+    "numpy",
+    "lightgbm",
+    "yfinance",
+    "pyarrow"
+]
+
+[project.scripts]
+trainer = "trainer.main:main"
+
+[tool.setuptools.package-dir]
+"trainer" = "trainer"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

@@ -1,0 +1,28 @@
+services:
+  execution-engine:
+    build:
+      context: .
+      dockerfile: services/execution-engine/Dockerfile
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+      - ./model_bundle:/app/model_bundle:ro
+    restart: unless-stopped
+
+  trainer:
+    build:
+      context: .
+      dockerfile: services/trainer/Dockerfile
+    env_file: .env
+    volumes:
+      - ./model_bundle:/app/model_bundle:rw
+    restart: unless-stopped
+
+  telegram-bot:
+    build:
+      context: .
+      dockerfile: services/telegram-bot/Dockerfile
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

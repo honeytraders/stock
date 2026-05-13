@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff mypy pytest respx httpx pydantic pydantic-settings pyyaml pandas numpy
+          pip install -e ./packages/core-contracts
+          pip install -e ./packages/broker-adapters
+          pip install -e ./services/execution-engine
+          pip install -e ./services/trainer
+          
+      - name: Lint with ruff
+        run: ruff check .
+        
+      - name: Typecheck with mypy
+        run: |
+          mypy packages/core-contracts/core_contracts
+          mypy packages/broker-adapters/broker_adapters
+          mypy services/execution-engine/execution_engine
+          mypy services/trainer/trainer
+        
+      - name: Run tests
+        run: pytest

@@ -1,0 +1,5 @@
+core-contracts
+httpx
+pydantic-settings
+pydantic
+pyyaml

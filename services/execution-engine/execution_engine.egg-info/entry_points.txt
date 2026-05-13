@@ -1,0 +1,2 @@
+[console_scripts]
+execution-engine = execution_engine.main:main
